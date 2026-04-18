@@ -1,0 +1,13 @@
+services:
+  # Frontend Nuxt
+  app:
+    build: .
+    volumes:
+      - ./app:/src
+      - /src/.nuxt
+      - /src/node_modules
+    ports:
+      - "3000:3000"
+
+volumes:
+  strapi-data:
