@@ -1,9 +1,9 @@
 ## Tout ce qui est produit doit être transmissible
 
-Chaque personne doit livrer :
+Chacun doit livrer :
 
 - du code
-- une doc courte
+- une documentation courte
 - un état d’avancement clair
 - ce qui est prêt / ce qui manque / ce qui bloque
 
@@ -11,7 +11,7 @@ Chaque personne doit livrer :
 
 # 1) Clément — API, base de données, schéma, seeder
 
-Clément construit la **base technique du projet**. Son travail doit être fait pour être **stable, compréhensible, et exploitable par Sofien et toi**.
+Clément construit la **base technique du projet**. Son travail doit être **stable, compréhensible et exploitable par Sofien et Nathan**.
 
 ## Objectif
 
@@ -22,7 +22,7 @@ Fournir un backend propre avec :
 - les données de test
 - l’API REST
 - l’API GraphQL
-- une documentation minimale pour que Sofien puisse brancher le front et faire les mesures
+- une documentation minimale pour que Sofien puisse brancher le front et réaliser les mesures
 
 ## Ce qu’il doit produire
 
@@ -56,12 +56,11 @@ Il doit fournir :
 - les cardinalités
 - les contraintes importantes
 
-Pas juste dans le code : il faut aussi un rendu exploitable visuellement ou textuellement.
+Pas uniquement dans le code : il faut aussi un rendu exploitable visuellement ou textuellement.
 
 ## C. Seeder réaliste
 
-Le seeder doit être pensé pour l’analyse, pas juste pour “remplir vite”.
-Il faut :
+Le seeder doit être pensé pour l’analyse, pas seulement pour “remplir vite”. Il faut :
 
 - assez de données pour observer des différences
 - des relations réalistes
@@ -76,7 +75,7 @@ Exemple :
 
 ## D. API REST et GraphQL alignées
 
-Très important : les deux API doivent exposer **le même périmètre métier**.
+Point essentiel : les deux API doivent exposer **le même périmètre métier**.
 
 Il faut définir un périmètre minimal commun, par exemple :
 
@@ -96,17 +95,17 @@ Clément doit remettre un document très court avec :
 - comment lancer le projet
 - comment lancer la base
 - comment lancer le seeder
-- URLs REST
-- endpoint GraphQL
-- identifiants éventuels
-- limites connues
-- éléments non finis
+- les URLs REST
+- l’endpoint GraphQL
+- les identifiants éventuels
+- les limites connues
+- les éléments non finis
 
 ## Ce qu’il doit transmettre à Sofien
 
 Sofien doit recevoir :
 
-- le projet qui démarre sans bricolage
+- un projet qui démarre sans bricolage
 - la liste exacte des routes REST
 - les requêtes GraphQL de base ou la structure du schéma
 - le jeu de données disponible
@@ -114,10 +113,10 @@ Sofien doit recevoir :
 
 ## Ce qu’il doit transmettre à Nathan
 
-Tu dois recevoir :
+Nathan doit recevoir :
 
 - le schéma métier
-- le schéma DB
+- le schéma de base de données
 - le périmètre fonctionnel exact
 - les choix techniques faits
 - les limites connues de l’implémentation
@@ -125,19 +124,19 @@ Tu dois recevoir :
 
 ## Critères de qualité pour Clément
 
-Son travail est bon si :
+Le travail est bon si :
 
-- on comprend rapidement le modèle de données
+- le modèle de données se comprend rapidement
 - REST et GraphQL sont comparables
 - le projet se lance facilement
 - le dataset est exploitable
-- rien n’est implicite
+- rien d’important n’est implicite
 
 ---
 
 # 2) Sofien — Front + analyses + mesures
 
-Sofien ne doit pas juste “faire un front”. Il doit construire un **outil de démonstration et de mesure**.
+Sofien ne doit pas seulement “faire un front”. Il doit construire un **outil de démonstration et de mesure**.
 
 ## Objectif
 
@@ -148,7 +147,7 @@ Créer un front minimal mais utile, capable de :
 - rendre visibles les différences
 - produire des mesures comparables
 
-Le front n’a pas besoin d’être “beau”. Il doit être **propre, stable, et instrumenté**.
+Le front n’a pas besoin d’être “beau”. Il doit être **propre, stable et instrumenté**.
 
 ## Ce qu’il doit produire
 
@@ -159,12 +158,12 @@ Le front doit permettre de tester les mêmes vues ou actions avec :
 - une version REST
 - une version GraphQL
 
-Il faut que le parallèle soit évident.
+Le parallèle doit être évident.
 
 Exemples de pages utiles :
 
 - fiche client
-- liste clients
+- liste de clients
 - devis détaillé
 - facture détaillée
 - dashboard simple avec plusieurs blocs de données
@@ -183,7 +182,7 @@ Sans protocole fixe, les mesures ne vaudront rien.
 
 ## C. Liste des éléments testables
 
-Voici la liste qu’il doit mesurer ou au minimum observer proprement :
+Voici la liste des éléments à mesurer, ou au minimum à observer proprement.
 
 ### Réseau / données
 
@@ -231,8 +230,7 @@ Voici la liste qu’il doit mesurer ou au minimum observer proprement :
 
 ## D. Format des résultats
 
-Sofien ne doit pas juste “dire ce qu’il a vu”.
-Il doit produire :
+Sofien ne doit pas seulement “dire ce qu’il a vu”. Il doit produire :
 
 - un tableau par scénario
 - une méthode de mesure
@@ -242,41 +240,41 @@ Il doit produire :
 
 ## Ce qu’il doit transmettre à Nathan
 
-Tu dois recevoir de sa part :
+Nathan doit recevoir :
 
 - les scénarios testés
 - les métriques relevées
 - les résultats bruts
 - les tableaux comparatifs
 - les captures éventuelles
-- son interprétation courte pour chaque scénario
+- une interprétation courte pour chaque scénario
 - les biais ou limites des tests
 
 ## Ce qu’il doit demander à Clément
 
-Il doit exiger de Clément :
+Sofien doit exiger de Clément :
 
-- stabilité de l’API
-- périmètre clair
-- jeux de données fixes
-- endpoints documentés
-- requêtes GraphQL testables immédiatement
+- une API stable
+- un périmètre clair
+- des jeux de données fixes
+- des endpoints documentés
+- des requêtes GraphQL testables immédiatement
 
 ## Critères de qualité pour Sofien
 
-Son travail est bon si :
+Le travail est bon si :
 
 - les tests sont reproductibles
 - les cas REST et GraphQL sont comparables
 - les métriques sont compréhensibles
-- il fournit des résultats exploitables, pas des impressions vagues
+- les résultats sont exploitables, et non de simples impressions
 - le front aide à démontrer, pas seulement à “faire joli”
 
 ---
 
 # 3) Nathan — concaténation des données et synthèse
 
-Ton rôle est central : tu transformes le travail technique en **analyse compréhensible, structurée et défendable**.
+Nathan a un rôle central : transformer le travail technique en **analyse compréhensible, structurée et défendable**.
 
 ## Objectif
 
@@ -288,13 +286,13 @@ Faire le lien entre :
 - les résultats observés
 - les conclusions utiles pour le projet
 
-Tu ne dois pas juste “rassembler”. Tu dois **mettre en cohérence**.
+Il ne s’agit pas seulement de “rassembler”, mais bien de **mettre en cohérence**.
 
-## Ce que tu dois produire
+## Ce qu’il doit produire
 
 ### A. Cadre commun de lecture
 
-Tu dois définir dès maintenant la grille qui servira à lire les résultats :
+Nathan doit définir dès maintenant la grille qui servira à lire les résultats :
 
 - performance
 - complexité
@@ -304,11 +302,11 @@ Tu dois définir dès maintenant la grille qui servira à lire les résultats :
 - gouvernance
 - pertinence selon le cas d’usage
 
-Comme ça, Clément et Sofien savent déjà comment leur travail sera exploité.
+Ainsi, Clément et Sofien savent dès le départ comment leur travail sera exploité.
 
 ## B. Consolidation des éléments techniques
 
-Tu dois récupérer de Clément :
+Nathan doit récupérer de Clément :
 
 - le modèle métier
 - le schéma de données
@@ -325,17 +323,17 @@ Et de Sofien :
 
 ## C. Mise en récit analytique
 
-Ton travail doit répondre à des questions comme :
+Le travail doit répondre à des questions comme :
 
 - dans quels cas REST est plus naturel ?
 - dans quels cas GraphQL apporte un vrai gain ?
 - quels gains sont réels et lesquels sont surtout théoriques ?
 - quels coûts cachés apparaissent côté serveur ?
-- dans le cadre de votre ERP, qu’est-ce qui ressort vraiment ?
+- dans le cadre de l’ERP, qu’est-ce qui ressort réellement ?
 
 ## D. Production des livrables finaux
 
-Tu devras probablement produire :
+Nathan devra probablement produire :
 
 - la synthèse écrite
 - les tableaux consolidés
@@ -343,11 +341,11 @@ Tu devras probablement produire :
 - les slides ou le support oral
 - la cohérence terminologique
 
-## Ce que tu dois exiger des deux autres
+## Ce qu’il doit exiger des deux autres
 
-Tu dois leur imposer un format de retour standard, sinon tu perdras du temps à reconstituer.
+Nathan doit imposer un format de retour standard, sinon du temps sera perdu à reconstituer l’information.
 
-Par exemple, chacun doit te remettre :
+Par exemple, chacun doit remettre :
 
 - ce qu’il a fait
 - ce qui marche
@@ -358,7 +356,7 @@ Par exemple, chacun doit te remettre :
 
 ## Critères de qualité pour Nathan
 
-Ton travail est bon si :
+Le travail est bon si :
 
 - la comparaison ne ressemble pas à une accumulation de résultats
 - les conclusions sont nuancées
