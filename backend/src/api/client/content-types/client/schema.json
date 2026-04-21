@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clients",
+  "info": {
+    "singularName": "client",
+    "pluralName": "clients",
+    "displayName": "Client"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "minLength": 2,
+      "required": true
+    },
+    "entreprise": {
+      "type": "string",
+      "minLength": 2,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "commandes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commande.commande",
+      "mappedBy": "client"
+    }
+  }
+}

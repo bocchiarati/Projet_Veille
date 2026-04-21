@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ordre_de_fabrications",
+  "info": {
+    "singularName": "ordre-de-fabrication",
+    "pluralName": "ordre-de-fabrications",
+    "displayName": "OrdreDeFabrication"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "reference": {
+      "type": "string",
+      "minLength": 2,
+      "required": true,
+      "unique": true
+    },
+    "quantite_a_produire": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "date_lancement": {
+      "type": "datetime",
+      "required": true
+    },
+    "statut": {
+      "type": "enumeration",
+      "enum": [
+        "Planifié",
+        "En cours",
+        "Terminé"
+      ]
+    },
+    "produit_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::produit.produit"
+    },
+    "commande_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::commande.commande",
+      "inversedBy": "ordre_de_fabrication"
+    }
+  }
+}

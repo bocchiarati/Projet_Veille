@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commandes",
+  "info": {
+    "singularName": "commande",
+    "pluralName": "commandes",
+    "displayName": "Commande"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date_commande": {
+      "type": "datetime",
+      "required": true
+    },
+    "statut": {
+      "type": "enumeration",
+      "required": true,
+      "default": "En cours",
+      "enum": [
+        "En cours",
+        "Livrée",
+        "Annulée"
+      ]
+    },
+    "client": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::client.client",
+      "inversedBy": "commandes"
+    },
+    "ligne_commandes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ligne-commande.ligne-commande",
+      "mappedBy": "commande"
+    },
+    "ordre_de_fabrication": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ordre-de-fabrication.ordre-de-fabrication",
+      "mappedBy": "commande_id"
+    }
+  }
+}

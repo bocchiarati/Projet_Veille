@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nomenclatures",
+  "info": {
+    "singularName": "nomenclature",
+    "pluralName": "nomenclatures",
+    "displayName": "Nomenclature"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quantite_requise": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "produit_fini_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::produit.produit"
+    },
+    "matiere_premiere_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::produit.produit"
+    }
+  }
+}

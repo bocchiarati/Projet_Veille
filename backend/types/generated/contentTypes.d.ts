@@ -430,6 +430,319 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiClientClient extends Struct.CollectionTypeSchema {
+  collectionName: 'clients';
+  info: {
+    displayName: 'Client';
+    pluralName: 'clients';
+    singularName: 'client';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    commandes: Schema.Attribute.Relation<'oneToMany', 'api::commande.commande'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    entreprise: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::client.client'
+    > &
+      Schema.Attribute.Private;
+    nom: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCommandeCommande extends Struct.CollectionTypeSchema {
+  collectionName: 'commandes';
+  info: {
+    displayName: 'Commande';
+    pluralName: 'commandes';
+    singularName: 'commande';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    client: Schema.Attribute.Relation<'manyToOne', 'api::client.client'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date_commande: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    ligne_commandes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ligne-commande.ligne-commande'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::commande.commande'
+    > &
+      Schema.Attribute.Private;
+    ordre_de_fabrication: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ordre-de-fabrication.ordre-de-fabrication'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    statut: Schema.Attribute.Enumeration<
+      ['En cours', 'Livr\u00E9e', 'Annul\u00E9e']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'En cours'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLigneCommandeLigneCommande
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ligne_commandes';
+  info: {
+    displayName: 'LigneCommande';
+    pluralName: 'ligne-commandes';
+    singularName: 'ligne-commande';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    commande: Schema.Attribute.Relation<'manyToOne', 'api::commande.commande'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ligne-commande.ligne-commande'
+    > &
+      Schema.Attribute.Private;
+    produit: Schema.Attribute.Relation<'manyToOne', 'api::produit.produit'>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantite: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNomenclatureNomenclature
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'nomenclatures';
+  info: {
+    displayName: 'Nomenclature';
+    pluralName: 'nomenclatures';
+    singularName: 'nomenclature';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::nomenclature.nomenclature'
+    > &
+      Schema.Attribute.Private;
+    matiere_premiere_id: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::produit.produit'
+    >;
+    produit_fini_id: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::produit.produit'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    quantite_requise: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOrdreDeFabricationOrdreDeFabrication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ordre_de_fabrications';
+  info: {
+    displayName: 'OrdreDeFabrication';
+    pluralName: 'ordre-de-fabrications';
+    singularName: 'ordre-de-fabrication';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    commande_id: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::commande.commande'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date_lancement: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ordre-de-fabrication.ordre-de-fabrication'
+    > &
+      Schema.Attribute.Private;
+    produit_id: Schema.Attribute.Relation<'oneToOne', 'api::produit.produit'>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantite_a_produire: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    reference: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    statut: Schema.Attribute.Enumeration<
+      ['Planifi\u00E9', 'En cours', 'Termin\u00E9']
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProduitProduit extends Struct.CollectionTypeSchema {
+  collectionName: 'produits';
+  info: {
+    displayName: 'Produit';
+    pluralName: 'produits';
+    singularName: 'produit';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categorie: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    en_stock: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    ligne_commandes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ligne-commande.ligne-commande'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::produit.produit'
+    > &
+      Schema.Attribute.Private;
+    nom: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    prix: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      ['Produit Fini', 'Mati\u00E8re Premi\u00E8re']
+    > &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTacheTache extends Struct.CollectionTypeSchema {
+  collectionName: 'taches';
+  info: {
+    displayName: 'Tache';
+    pluralName: 'taches';
+    singularName: 'tache';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description_tache: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 10;
+      }>;
+    employe_nom: Schema.Attribute.String & Schema.Attribute.Required;
+    heures_passees: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tache.tache'> &
+      Schema.Attribute.Private;
+    ordre_de_fabrication: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ordre-de-fabrication.ordre-de-fabrication'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -941,6 +1254,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::client.client': ApiClientClient;
+      'api::commande.commande': ApiCommandeCommande;
+      'api::ligne-commande.ligne-commande': ApiLigneCommandeLigneCommande;
+      'api::nomenclature.nomenclature': ApiNomenclatureNomenclature;
+      'api::ordre-de-fabrication.ordre-de-fabrication': ApiOrdreDeFabricationOrdreDeFabrication;
+      'api::produit.produit': ApiProduitProduit;
+      'api::tache.tache': ApiTacheTache;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
