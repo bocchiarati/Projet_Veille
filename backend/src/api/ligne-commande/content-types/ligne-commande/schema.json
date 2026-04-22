@@ -27,6 +27,12 @@
       "relation": "manyToOne",
       "target": "api::produit.produit",
       "inversedBy": "ligne_commandes"
+    },
+    "ordre_de_fabrication": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ordre-de-fabrication.ordre-de-fabrication",
+      "inversedBy": "ligne_commande"
     }
   }
 }

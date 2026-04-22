@@ -12,7 +12,8 @@
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "seed": "echo \"To seed the database, run 'strapi console' and then paste: require('./database/seed-console.js').seed()\""
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.42.1",
@@ -27,9 +28,12 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
+    "@types/faker": "^6.6.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "faker": "^6.6.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "engines": {

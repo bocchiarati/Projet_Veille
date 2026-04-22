@@ -18,6 +18,24 @@ Ce projet utilise Docker pour simplifier l'installation et le développement. Vo
    docker compose run --rm strapi npm install
    ```
 
+## 🌱 Peupler la base de données (Seeding)
+
+Pour remplir la base de données avec un jeu de données de test, suivez ces étapes :
+
+1.  **Arrêtez l'application Strapi** si elle est en cours d'exécution mais laisser la base de donnée allumée.
+
+2.  **Lancez la console Strapi** en utilisant Docker :
+    ```bash
+    docker compose run --rm strapi npm run console
+    ```
+
+3.  Une fois que le prompt `[strapi]>` apparaît, **copiez-collez la commande suivante** et appuyez sur Entrée :
+    ```javascript
+    require('./database/seed-console.js').seed()
+    ```
+
+Le script va s'exécuter et remplir la base de données. Une fois terminé, vous pouvez quitter la console (`Ctrl+C`) et redémarrer l'application normalement.
+
 ## 🚀 Lancement du projet
 
 Démarrez l'application Strapi et sa base de données PostgreSQL avec la commande suivante :

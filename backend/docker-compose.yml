@@ -39,6 +39,3 @@ services:
 networks:
   strapi:
     driver: bridge
-
-volumes:
-  pg_data:

@@ -36,12 +36,6 @@
       "relation": "oneToMany",
       "target": "api::ligne-commande.ligne-commande",
       "mappedBy": "commande"
-    },
-    "ordre_de_fabrication": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::ordre-de-fabrication.ordre-de-fabrication",
-      "mappedBy": "commande_id"
     }
   }
 }

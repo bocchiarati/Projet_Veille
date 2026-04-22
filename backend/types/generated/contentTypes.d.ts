@@ -495,10 +495,6 @@ export interface ApiCommandeCommande extends Struct.CollectionTypeSchema {
       'api::commande.commande'
     > &
       Schema.Attribute.Private;
-    ordre_de_fabrication: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::ordre-de-fabrication.ordre-de-fabrication'
-    >;
     publishedAt: Schema.Attribute.DateTime;
     statut: Schema.Attribute.Enumeration<
       ['En cours', 'Livr\u00E9e', 'Annul\u00E9e']
@@ -533,6 +529,10 @@ export interface ApiLigneCommandeLigneCommande
       'api::ligne-commande.ligne-commande'
     > &
       Schema.Attribute.Private;
+    ordre_de_fabrication: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ordre-de-fabrication.ordre-de-fabrication'
+    >;
     produit: Schema.Attribute.Relation<'manyToOne', 'api::produit.produit'>;
     publishedAt: Schema.Attribute.DateTime;
     quantite: Schema.Attribute.Integer &
@@ -605,14 +605,14 @@ export interface ApiOrdreDeFabricationOrdreDeFabrication
     draftAndPublish: true;
   };
   attributes: {
-    commande_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::commande.commande'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date_lancement: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    ligne_commande: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ligne-commande.ligne-commande'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

@@ -39,11 +39,11 @@
       "relation": "oneToOne",
       "target": "api::produit.produit"
     },
-    "commande_id": {
+    "ligne_commande": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::commande.commande",
-      "inversedBy": "ordre_de_fabrication"
+      "target": "api::ligne-commande.ligne-commande",
+      "mappedBy": "ordre_de_fabrication"
     }
   }
 }
