@@ -4,3 +4,4 @@
 **/dist
 **/.strapi-updater.json
 **/.strapi
+/backend_data/
