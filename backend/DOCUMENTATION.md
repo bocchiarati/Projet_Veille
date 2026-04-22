@@ -1,6 +1,6 @@
 # Documentation de l'API et des Entités
 
-Ce document décrit le modèle de données de l'application ainsi que les endpoints de l'API REST pour y accéder.
+Ce document décrit le modèle de données de l'application ainsi que les endpoints des API REST et GraphQL pour y accéder.
 
 ## 1. Modèle de Données (Entités)
 
@@ -89,7 +89,7 @@ Une nomenclature définit les `Matières Premières` nécessaires pour fabriquer
 
 ## 2. Endpoints de l'API REST
 
-L'API est accessible via le préfixe `/api`.
+L'API REST est accessible via le préfixe `/api`.
 
 ### Endpoints de base (Exemple avec `clients`)
 
@@ -101,31 +101,67 @@ L'API est accessible via le préfixe `/api`.
 
 Ce modèle s'applique à toutes les autres entités (ex: `/api/produits`, `/api/commandes`, etc.).
 
+### Endpoints Métier (Logique personnalisée)
+
+#### Créer un Ordre de Fabrication
+Crée un Ordre de Fabrication (OF) à partir d'une ligne de commande existante.
+
+- **Endpoint**: `POST /api/ligne-commandes/:id/create-of`
+- **Description**:
+  - Récupère la ligne de commande spécifiée par `:id`.
+  - Vérifie si un OF n'existe pas déjà pour cette ligne.
+  - Crée un nouvel OF en utilisant la quantité et le produit de la ligne de commande.
+- **Réponse**:
+  - `201 Created`: Renvoie l'objet de l'OF nouvellement créé.
+  - `404 Not Found`: Si la ligne de commande n'existe pas.
+  - `400 Bad Request`: Si un OF existe déjà ou si la ligne de commande n'a pas de produit.
+
 ### Important : Population des Relations
 
-Par défaut, l'API REST ne renvoie que les ID des relations pour des raisons de performance. Pour inclure les données complètes des relations, vous devez utiliser le paramètre `populate`.
+Le paramètre `populate` est essentiel pour récupérer les données des relations.
 
-#### Exemple 1 : Simple
-Récupérer les commandes et peupler la relation directe avec le client.
+- **Simple**: `GET /api/commandes?populate=client`
+- **Imbriqué**: `GET /api/commandes?populate[client]=*&populate[ligne_commandes][populate][produit]=*`
 
-`GET /api/commandes?populate=client`
+## 3. API GraphQL
 
-#### Exemple 2 : Tout peupler (1er niveau)
-Récupérer les commandes et peupler toutes leurs relations directes.
+L'API GraphQL est accessible via l'endpoint unique `POST /graphql`.
 
-`GET /api/commandes?populate=*`
+### Queries et Mutations de base
 
-#### Exemple 3 : Population imbriquée (Avancé)
-Récupérer les commandes, avec les détails du client, les lignes de commande, et les détails du produit pour chaque ligne.
+Le plugin GraphQL génère automatiquement les queries (ex: `commandes`, `commande`) et les mutations (ex: `createCommande`, `updateCommande`) pour chaque entité.
 
-```
-GET /api/commandes?populate[client][fields][0]=nom&populate[ligne_commandes][populate][produit][fields][0]=nom
-```
+### Mutations Métier (Logique personnalisée)
 
-Une syntaxe plus simple pour une population profonde est d'utiliser des objets :
+#### Créer un Ordre de Fabrication
+Crée un Ordre de Fabrication (OF) à partir d'une ligne de commande existante.
 
-```
-GET /api/commandes?populate[client]=*&populate[ligne_commandes][populate][produit]=*
-```
-
-Cette dernière requête est très utile pour obtenir un objet `Commande` complet avec toutes les informations nécessaires.
+- **Mutation**:
+  ```graphql
+  mutation CreateOfFromLigne($ligneCommandeId: ID!) {
+    createOf(id: $ligneCommandeId) {
+      data {
+        id
+        attributes {
+          reference
+          statut
+          ligne_commande {
+            data {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+- **Variables**:
+  ```json
+  {
+    "ligneCommandeId": "123"
+  }
+  ```
+- **Description**:
+  - Exécute la même logique métier que l'endpoint REST.
+  - Renvoie une erreur si la ligne de commande n'est pas trouvée, si un OF existe déjà, etc.
+- **Réponse**: Renvoie l'entité de l'OF nouvellement créé.
