@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - ../backend_data:/var/lib/postgresql/data/
     networks:
       - strapi
     healthcheck:
