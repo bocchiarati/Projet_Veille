@@ -1,13 +1,13 @@
 services:
-  # Frontend Nuxt
   app:
     build: .
-    volumes:
-      - ./app:/src
-      - /src/.nuxt
-      - /src/node_modules
     ports:
-      - "3000:3000"
-
-volumes:
-  strapi-data:
+      - "3333:3000"
+    volumes:
+      - .:/src
+      - /src/node_modules
+    environment:
+      - NUXT_PUBLIC_REST_URL=http://localhost:1337/api
+      - NUXT_PUBLIC_GRAPHQL_URL=http://localhost:1337/graphql
+      - WATCHPACK_POLLING=true # Aide Vite à voir les changements de fichiers dans Docker
+      - NODE_OPTIONS=--max-old-space-size=2048 # Donne plus de RAM à Node

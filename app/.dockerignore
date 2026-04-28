@@ -1,0 +1,19 @@
+# Fichiers et dossiers à ignorer lors du build Docker
+
+# Dépendances Node
+node_modules
+
+# Fichiers de build et de cache Nuxt
+.nuxt
+.output
+dist
+.cache
+
+# Logs
+logs
+*.log
+
+# Fichiers système et IDE
+.DS_Store
+.idea
+.fleet
